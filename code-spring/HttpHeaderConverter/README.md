@@ -14,9 +14,9 @@ public ResponseEntity getUseInfo(@RequestHeader("x-auth-user") XAuthUser xAuthUs
 }
 ```
 
-String 내에 내장된 ConversionService 라는 내장된 서비스에서 Converter 구현체 Bean들을 Converter fltmxmdp emdfhr gksek. 
+String 내에 내장된 ConversionService 라는 내장된 서비스에서 Converter 구현체 Bean들을 Converter 리스트에 등록한다. 
 
-외부 데이터가 들어오고, Souvce Class Type -> Target Class Type 이 Converter에 등록된 형식과 일치 하면 해당 Converter 가 동작한다.
+외부 데이터가 들어오고, Source Class Type -> Target Class Type 이 Converter 에 등록된 형식과 일치 하면 해당 Converter 가 동작한다.
 
 
 ## Test
