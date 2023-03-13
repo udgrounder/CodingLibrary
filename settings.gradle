@@ -1,0 +1,107 @@
+def jsonFile = file('packageInfo.json')
+def parsedJson = new groovy.json.JsonSlurper().parseText(jsonFile.text)
+
+// Load SubProject Info
+def subProjectList = []
+parsedJson.subProjectList.each { jsonObject ->
+    def obj = [
+            'name': jsonObject.name,
+            'group': jsonObject.group,
+            'rootPkg': jsonObject.rootPkg,
+            'type': jsonObject.type
+    ]
+    subProjectList.add(obj)
+}
+
+// Root Project
+rootProject.name = parsedJson.rootProjectName
+def group = parsedJson.group
+
+// Sub Project Settings
+subProjectList.each { subProject ->
+
+    println("# settings.gradle # projectName: ${subProject.name}")
+
+    // group 폴더 생성
+    def groupDir = new File(rootDir, subProject.group)
+    if (!groupDir.exists()) {
+        groupDir.mkdirs()
+    }
+
+    // group-build.gradle 파일이 생성
+    def groupGradleFile = new File(rootDir, "${subProject.group}/${subProject.group}-build.gradle")
+
+    if (!groupGradleFile.exists()) {
+        groupGradleFile.text = """
+            dependencies {
+            
+            }
+        """.stripIndent()
+    }
+
+    // 프로젝트 폴더 생성
+    def projDir = new File(rootDir, "${subProject.group}/${subProject.name}")
+    if (!projDir.exists()) {
+        projDir.mkdirs()
+    }
+
+    // build.gradle 파일이 없으면 생성
+    def gradleFile = new File(projDir, "build.gradle")
+    if (!gradleFile.exists()) {
+        gradleFile.text = """apply from: '../""" +  groupGradleFile.name + """'
+        dependencies {
+            
+        }
+        """.stripIndent()
+    }
+
+    // readme.md file
+    def readmeFile = new File(projDir, "README.md")
+    if (!readmeFile.exists()) {
+        readmeFile.text = "#${subProject.name}"
+    }
+
+
+
+    // 폴더 리스트를 작성합니다.
+    def workDirList = [
+            "src/main/java/${group}/${subProject.rootPkg}",
+            "src/test/java/${group}/${subProject.rootPkg}",
+            "src/main/resources",
+            "src/main/resources/static",
+            "src/main/resources/templates",
+            "src/test/resources",
+    ]
+
+    // 작업 폴더를 생성합니다.
+    workDirList.each { srcDir ->
+        def srcFolder = new File(projDir, srcDir)
+        if (!srcFolder.exists()) {
+            srcFolder.mkdirs()
+        }
+    }
+
+    // 필요한 파일을 생성
+    def workFileList = [
+            "src/main/resources/application.yml"
+    ]
+
+    workFileList.each { srcDir ->
+        def srcFile = new File(projDir, srcDir)
+        if (!srcFile.exists()) {
+            srcFile.text = ""
+        }
+    }
+
+    def projectName = ":${subProject.name}"
+    println("# settings.gradle # projectName: ${projectName}")
+
+    // include 구문을 작성합니다.
+    include projectName
+
+    // Project 객체의 projectDir 속성을 설정합니다.
+    project(projectName).projectDir = projDir
+
+}
+
+

@@ -1,0 +1,9 @@
+{
+  "rootProjectName": "CodingLibrary",
+  "group": "my.example",
+  "version": "1.0-SNAPSHOT",
+  "subProjectList" : [
+
+
+  ]
+}

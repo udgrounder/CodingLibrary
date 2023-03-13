@@ -1,0 +1,129 @@
+buildscript {
+    ext {
+        springBootVersion = '2.7.9' // for springboot
+        NodePluginVersion = '3.5.0' // for node
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath "com.github.node-gradle:gradle-node-plugin:$NodePluginVersion"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+}
+
+def jsonFile = file('packageInfo.json')
+def parsedJson = new groovy.json.JsonSlurper().parseText(jsonFile.text)
+
+def subProjectList = []
+parsedJson.subProjectList.each { jsonObject ->
+    def obj = [
+            'name'       : jsonObject.name,
+            'group'      : jsonObject.group,
+            'rootPkg'    : jsonObject.rootPkg,
+            'type'       : jsonObject.type,
+            'hasResource': jsonObject.hasResource
+    ]
+    subProjectList.add(obj)
+}
+
+
+allprojects {
+    group = parsedJson.group
+    version = parsedJson.version
+}
+
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'war'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+
+subProjectList.each { subProject ->
+
+    def isJar = subProject.type == 'jar' ? true : false
+    def isBootWar = subProject.type == 'bootWar' ? true : false
+    def isBootJar = subProject.type == 'bootJar' ? true : false
+    def isNode = subProject.type == 'node' ? true : false
+
+    def projectName = ":${subProject.name}"
+
+    if (isNode) {
+        // node task run
+    }
+
+//    if ( isJar || isBootWar || isBootJar) {
+//        sourceSets {
+//            main {
+//                resources {
+//                    srcDirs = ['src/main/java', 'src/main/resources']
+//                    include '**/**'
+//                }
+//            }
+//        }
+//    }
+
+
+    project(projectName) {
+        jar.enabled(isJar)
+        bootJar.enabled(isBootJar)
+        bootWar.enabled(isBootWar)
+        if(isNode) bootJar.enabled(isBootJar)
+    }
+}
+
+
+//task nodePrefare(subProject) {
+//    node.nodeProjectDir = file("${project.projectDir}/src/frontend")
+//
+//    task buildAdmin(type: NpmTask, dependsOn: setup) {
+//        args = ['run', 'build']
+//    }
+//
+//    task buildCopyAdmin(dependsOn: buildAdmin) {
+//        copy {
+//            from "${project.projectDir}/src/frontend/dist/"
+//            into "${project.projectDir}/src/main/resources/static/"
+//        }
+//    }
+//
+//    processResources.dependsOn 'buildCopyAdmin'
+// }
+
