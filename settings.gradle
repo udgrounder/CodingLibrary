@@ -61,8 +61,6 @@ subProjectList.each { subProject ->
         readmeFile.text = "#${subProject.name}"
     }
 
-
-
     // 폴더 리스트를 작성합니다.
     def workDirList = [
             "src/main/java/${group}/${subProject.rootPkg}",
