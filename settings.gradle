@@ -58,7 +58,7 @@ subProjectList.each { subProject ->
     // readme.md file
     def readmeFile = new File(projDir, "README.md")
     if (!readmeFile.exists()) {
-        readmeFile.text = "#${subProject.name}"
+        readmeFile.text = "# ${subProject.name}"
     }
 
     // 폴더 리스트를 작성합니다.
