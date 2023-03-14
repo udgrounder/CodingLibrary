@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/code-spring/HttpHeaderConverter" />
+            <option value="$PROJECT_DIR$/study-fc-springboot/todo-server" />
           </set>
         </option>
       </GradleProjectSettings>

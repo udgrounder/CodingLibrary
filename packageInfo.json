@@ -4,11 +4,16 @@
   "version": "1.0-SNAPSHOT",
   "subProjectList" : [
     {
-      "name": "HttpHeaderConverter",
       "group": "code-spring",
+      "name": "HttpHeaderConverter",
       "rootPkg": "headConv",
       "type": "bootJar"
+    },
+    {
+      "group": "study-fc-springboot",
+      "name": "todo-server",
+      "rootPkg": "todo",
+      "type": "bootJar"
     }
-
   ]
 }
