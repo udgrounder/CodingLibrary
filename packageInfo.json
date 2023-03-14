@@ -17,7 +17,7 @@
     },
     {
       "group": "study-cpt-sulzip",
-      "name": "sc-sulzip-api-server",
+      "name": "sc-sulzip-serving-api",
       "rootPkg": "sulzip",
       "type": "bootJar"
     },
