@@ -4,7 +4,7 @@
   "version": "1.0-SNAPSHOT",
   "subProjectList" : [
     {
-      "group": "code-spring",
+      "group": "code-spring-case",
       "name": "HttpHeaderConverter",
       "rootPkg": "headConv",
       "type": "bootJar"
