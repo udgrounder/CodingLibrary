@@ -1,5 +1,0 @@
-apply from: '../study-cpt-sulzip-build.gradle'
-        dependencies {
-            
-        }
-        

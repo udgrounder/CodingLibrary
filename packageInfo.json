@@ -11,19 +11,19 @@
     },
     {
       "group": "study-fc-springboot",
-      "name": "todo-server",
+      "name": "sf-todo-server",
       "rootPkg": "todo",
       "type": "bootJar"
     },
     {
       "group": "study-cpt-sulzip",
-      "name": "sulzip-api-server",
+      "name": "sc-sulzip-api-server",
       "rootPkg": "sulzip",
       "type": "bootJar"
     },
     {
       "group": "study-cpt-sulzip",
-      "name": "common",
+      "name": "sc-sulzip-common",
       "rootPkg": "sulzip.common",
       "type": "bootJar"
     }

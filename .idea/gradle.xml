@@ -9,9 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/code-spring/HttpHeaderConverter" />
-            <option value="$PROJECT_DIR$/study-cpt-sulzip/common" />
-            <option value="$PROJECT_DIR$/study-cpt-sulzip/sulzip-api-server" />
-            <option value="$PROJECT_DIR$/study-fc-springboot/todo-server" />
+            <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-api-server" />
+            <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-common" />
+            <option value="$PROJECT_DIR$/study-fc-springboot/sf-todo-server" />
           </set>
         </option>
       </GradleProjectSettings>
