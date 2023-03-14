@@ -8,7 +8,7 @@
 
 이 프로젝트 자체가 기본적으로 springboot 를 기반으로 하고 있는 Coding library 프로젝트 이다.
 
-우선 현재 root 프로젝트에 있는 gradle build 파일에 이 재사용 가능 코드 라이브러리 중 하나이다.
+현재 root 프로젝트에 있는 gradle build 파일도 재사용 가능 코드 라이브러리 중 하나이다.
 
 ## gradle 설명
 빌드를 편하게 하기 위해서 다음 빌드 파일을 만들었다.
