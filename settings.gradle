@@ -39,6 +39,13 @@ subProjectList.each { subProject ->
         """.stripIndent()
     }
 
+    // group readme.md file
+    def groupReadmeFile = new File(groupDir, "README.md")
+    if (!groupReadmeFile.exists()) {
+        groupReadmeFile.text = "# ${subProject.group}"
+    }
+
+
     // 프로젝트 폴더 생성
     def projDir = new File(rootDir, "${subProject.group}/${subProject.name}")
     if (!projDir.exists()) {
@@ -55,10 +62,10 @@ subProjectList.each { subProject ->
         """.stripIndent()
     }
 
-    // readme.md file
-    def readmeFile = new File(projDir, "README.md")
-    if (!readmeFile.exists()) {
-        readmeFile.text = "# ${subProject.name}"
+    // project readme.md file
+    def projReadmeFile = new File(projDir, "README.md")
+    if (!projReadmeFile.exists()) {
+        projReadmeFile.text = "# ${subProject.name}"
     }
 
     // 폴더 리스트를 작성합니다.
