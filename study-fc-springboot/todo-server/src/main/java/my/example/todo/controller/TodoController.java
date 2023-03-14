@@ -2,13 +2,12 @@ package my.example.todo.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import my.example.todo.model.TodoEntity;
 import my.example.todo.model.TodoRequest;
 import my.example.todo.model.TodoResponse;
 import my.example.todo.service.TodoService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @CrossOrigin
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/")
 public class TodoController {
@@ -26,7 +25,7 @@ public class TodoController {
 
 
     @PostMapping
-    public ResponseEntity<TodoResponse> create(@RequestBody TodoRequest request) {
+    public ResponseEntity<TodoResponse> create(@RequestBody @NotNull TodoRequest request) {
 
         log.info("CREATE");
 

@@ -2,6 +2,7 @@ apply from: '../study-fc-springboot-build.gradle'
 dependencies {
         implementation('org.springframework.boot:spring-boot-starter-data-rest')
         implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+        implementation 'org.jetbrains:annotations:23.0.0'
 
         runtimeOnly('com.h2database:h2')
 
