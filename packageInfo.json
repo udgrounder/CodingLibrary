@@ -14,6 +14,18 @@
       "name": "todo-server",
       "rootPkg": "todo",
       "type": "bootJar"
+    },
+    {
+      "group": "study-cpt-sulzip",
+      "name": "sulzip-api-server",
+      "rootPkg": "sulzip",
+      "type": "bootJar"
+    },
+    {
+      "group": "study-cpt-sulzip",
+      "name": "common",
+      "rootPkg": "sulzip.common",
+      "type": "bootJar"
     }
   ]
 }

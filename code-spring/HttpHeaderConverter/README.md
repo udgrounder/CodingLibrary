@@ -22,3 +22,13 @@ String 내에 내장된 ConversionService 라는 내장된 서비스에서 Conve
 ## Test
 intelliJ 에서 제공하는 http 파일로 테스트 가능한다. 
 /src/test/Scratches/scratch.http
+
+
+
+## 참고
+포맷을 변경해 주는 Formatter 도 있다.
+날짜 포맷을 통일할때 유용해 보인다. 
+
+날짜 포맷 관련 아래 참조
+
+https://www.ionos.com/digitalguide/websites/web-development/iso-8601/
