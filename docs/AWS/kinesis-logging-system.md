@@ -3,7 +3,7 @@
 1. 어플리케이션
 2. Logback Kinesis layout
 3. Kinesis DataStream
-    1. 분기 to CloudWatch -> end
+   * 분기 to CloudWatch -> end
 4. Kinesis Firehose
 5. S3
 6. Excute Lambda at S3 filecreate event
