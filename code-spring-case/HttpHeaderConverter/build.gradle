@@ -1,4 +1,4 @@
-apply from: '../code-spring-build.gradle'
+apply from: '../code-spring-case-build.gradle'
         dependencies {
             
         }
