@@ -18,10 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 @EnableGlobalMethodSecurity(
-//        prePostEnabled = true // Spring Security의 @PreAuthorize, @PreFilter /@PostAuthorize, @PostFilter어노테이션 활성화 여부
-        securedEnabled = true // @Secured어노테이션 활성화 여부
+        prePostEnabled = true // Spring Security의 @PreAuthorize, @PreFilter /@PostAuthorize, @PostFilter어노테이션 활성화 여부
+//        securedEnabled = true // @Secured어노테이션 활성화 여부
 //        jsr250Enabled = true   // @RoleAllowed 어노테이션 사용 활성화 여부
 )
 public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
