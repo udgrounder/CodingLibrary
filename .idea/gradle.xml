@@ -9,7 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/code-spring-case/HttpHeaderConverter" />
+            <option value="$PROJECT_DIR$/code-spring-case/SpringRestDocs" />
+            <option value="$PROJECT_DIR$/code-spring-case/csc-HttpHeaderConverter" />
+            <option value="$PROJECT_DIR$/code-spring-case/csc-SpringSecurity" />
             <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-common" />
             <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-serving-api" />
             <option value="$PROJECT_DIR$/study-fc-springboot/sf-todo-server" />

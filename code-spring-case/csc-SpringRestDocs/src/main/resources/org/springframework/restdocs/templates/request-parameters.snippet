@@ -1,0 +1,21 @@
+[%autowidth.stretch]
+|===
+|파라메터|type|필수여부|Format|설명
+//    |제약조건
+
+{{#parameters}}
+
+|{{name}}
+|{{type}}
+|{{^optional}}필수{{/optional}}
+|{{#format}}{{.}} +{{/format}}
+|{{description}}
+//|{{#constraints}}{{.}} +{{/constraints}}
+
+{{/parameters}}
+|===
+
+
+
+
+

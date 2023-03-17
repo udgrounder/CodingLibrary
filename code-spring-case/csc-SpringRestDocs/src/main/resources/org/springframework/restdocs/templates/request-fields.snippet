@@ -1,0 +1,14 @@
+[%autowidth.stretch]
+|===
+|Path|Type|Description|Optional|Format|Constraints
+
+{{#fields}}
+|{{path}}
+|{{type}}
+|{{^optional}}필수{{/optional}}
+|{{description}}
+|{{#format}}{{.}} + {{/format}}
+|{{#constraints}}{{.}} + {{/constraints}}
+
+{{/fields}}
+|===

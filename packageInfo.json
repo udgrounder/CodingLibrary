@@ -5,8 +5,20 @@
   "subProjectList" : [
     {
       "group": "code-spring-case",
-      "name": "HttpHeaderConverter",
+      "name": "csc-HttpHeaderConverter",
       "rootPkg": "headConv",
+      "type": "bootJar"
+    },
+    {
+      "group": "code-spring-case",
+      "name": "csc-SpringSecurity",
+      "rootPkg": "security",
+      "type": "bootJar"
+    },
+    {
+      "group": "code-spring-case",
+      "name": "SpringRestDocs",
+      "rootPkg": "restdocs",
       "type": "bootJar"
     },
     {

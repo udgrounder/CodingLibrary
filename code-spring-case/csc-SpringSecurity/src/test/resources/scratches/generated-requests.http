@@ -1,0 +1,47 @@
+
+###
+# @no-cookie-jar
+GET http://localhost:18080/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiQ0FNUCxBR0VOQ1ksQ0hBTk5FTCIsImNhbXBJZCI6IjEyMzQiLCJhZ2VuY3lJZCI6IjEyMzQiLCJjaGFubmVsSWQiOiIxMjM0IiwiY2FtcE5hbWUiOiLsooXsnbTsu7XsuqDtlZHsnqUiLCJpYXQiOjE1MTYyMzkwMjJ9.ZvJosl_WT12qQiay-qZKs9hHbfai6OaVXUqaz2Wntu0
+
+
+###
+GET http://localhost:18080/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiQ0FNUCxBR0VOQ1ksQ0hBTk5FTCIsImNhbXBJZCI6IjEyMzQiLCJhZ2VuY3lJZCI6IjEyMzQiLCJjaGFubmVsSWQiOiIxMjM0IiwiY2FtcE5hbWUiOiLsooXsnbTsu7XsuqDtlZHsnqUiLCJpYXQiOjE1MTYyMzkwMjJ9.ZvJosl_WT12qQiay-qZKs9hHbfai6OaVXUqaz2Wntu0
+
+###
+GET http://localhost:18080/readme
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiQ0FNUCxBR0VOQ1ksQ0hBTk5FTCIsImNhbXBJZCI6IjEyMzQiLCJhZ2VuY3lJZCI6IjEyMzQiLCJjaGFubmVsSWQiOiIxMjM0IiwiY2FtcE5hbWUiOiLsooXsnbTsu7XsuqDtlZHsnqUiLCJpYXQiOjE1MTYyMzkwMjJ9.ZvJosl_WT12qQiay-qZKs9hHbfai6OaVXUqaz2Wntu0
+
+
+
+###
+GET http://localhost:18080/readme2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiQ0FNUCxBR0VOQ1ksQ0hBTk5FTCIsImNhbXBJZCI6IjEyMzQiLCJhZ2VuY3lJZCI6IjEyMzQiLCJjaGFubmVsSWQiOiIxMjM0IiwiY2FtcE5hbWUiOiLsooXsnbTsu7XsuqDtlZHsnqUiLCJpYXQiOjE1MTYyMzkwMjJ9.ZvJosl_WT12qQiay-qZKs9hHbfai6OaVXUqaz2Wntu0
+
+
+###
+GET http://localhost:18080/error
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjoiQ0FNUCxBR0VOQ1ksQ0hBTk5FTCIsImNhbXBJZCI6IjEyMzQiLCJhZ2VuY3lJZCI6IjEyMzQiLCJjaGFubmVsSWQiOiIxMjM0IiwiY2FtcE5hbWUiOiLsooXsnbTsu7XsuqDtlZHsnqUiLCJpYXQiOjE1MTYyMzkwMjJ9.ZvJosl_WT12qQiay-qZKs9hHbfai6OaVXUqaz2Wntu0
+
+
+
+
+
+
+
+######################
+# Http Header Basic 방식 테스트
+###
+GET http://localhost:18080/user
+Authorization: Basic dXNlcjp1c2Vy
+
+
+###
+GET http://localhost:18080/admin
+Authorization: Basic YWRtaW46YWRtaW4=
+
+###
+GET http://localhost:18080/readme
+Authorization: Basic user user
+

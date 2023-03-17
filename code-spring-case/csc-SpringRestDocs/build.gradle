@@ -1,0 +1,49 @@
+buildscript {
+        ext {
+                restdocsVersion = '2.0.7.RELEASE'
+                restdocsApiSpecVersion = '0.15.2'
+                snippetsDir = file('build/generated-snippets')
+        }
+}
+
+plugins {
+        id "org.asciidoctor.jvm.convert" version "3.3.2"
+        id 'com.epages.restdocs-api-spec' version "$restdocsApiSpecVersion"
+
+}
+
+configurations {
+        asciidoctorExt
+}
+
+apply from: '../code-spring-case-build.gradle'
+apply plugin: "org.asciidoctor.jvm.convert"
+
+
+
+dependencies {
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc:$restdocsVersion"
+        testImplementation "com.epages:restdocs-api-spec-mockmvc:$restdocsApiSpecVersion"
+        asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:$restdocsVersion"
+        // https://mvnrepository.com/artifact/org.springframework.restdocs/spring-restdocs-core
+//        implementation group: 'org.springframework.restdocs', name: 'spring-restdocs-core', version: '2.0.7.RELEASE'
+
+
+
+        // for env
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.6'
+
+        // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.9'
+
+
+        // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+        implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '2.0.2'
+
+
+
+}
+        
