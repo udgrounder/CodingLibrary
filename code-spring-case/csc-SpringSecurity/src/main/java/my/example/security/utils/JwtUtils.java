@@ -3,33 +3,33 @@ package my.example.security.utils;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import my.example.security.model.OpenApiUserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.Date;
 
 @Slf4j
-public class JwtTokenUtils {
+@Component
+public class JwtUtils {
 
 
-//    private static final Algorithm ALGORITHM = Algorithm.HMAC256("사랑의하츄핑");
+//    private static final Algorithm ALGORITHM = Algorithm.HMAC256("asdfasdfasdfasdfwersdfwer");
 
-    private static final String key = "mysecret12mysecret12mysecret1212";
+
+    @Value("${jwt.token.expirationMs}")
+    private int expirationMs;
+
+    @Value("${jwt.token.secretKey}")
+    private String secretKey;
 
 
     public static final String TOKEN_TYPE_BEARER = "BEARER";
 
-    public static final String NON_MEMBER_TOKEN = "reservation-token";
-
-
-    public static String getPayload(String token) throws RuntimeException {
+    public String getPayload(String token) throws RuntimeException {
 
         if(token == null ) {
             throw new RuntimeException("유효하지 않는 토큰 입니다." );
@@ -44,7 +44,7 @@ public class JwtTokenUtils {
         log.info("only token _{}_" , tokens[1]);
 
         return Jwts.parserBuilder()
-                .setSigningKey(getSigninKey(key))
+                .setSigningKey(getSigninKey(secretKey))
                 .build()
                 .parseClaimsJws(tokens[1])
                 .getBody()
@@ -131,6 +131,15 @@ public class JwtTokenUtils {
      */
 
 
+    public String generateJwtToken(Authentication authentication) {
+        OpenApiUserDetails userPrincipal = (OpenApiUserDetails) authentication.getPrincipal();
+        return Jwts.builder()
+                .setSubject((userPrincipal.getUsername()))
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + expirationMs))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+    }
 
 
 }

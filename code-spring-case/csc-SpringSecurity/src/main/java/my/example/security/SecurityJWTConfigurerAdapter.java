@@ -2,6 +2,7 @@ package my.example.security;
 
 import my.example.security.filter.JWTAuthCheckFilter;
 import my.example.security.service.CustomUserDetailsService;
+import my.example.security.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,9 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -40,16 +44,14 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers("/", "/**").permitAll()
-//                .mvcMatchers(HttpMethod.GET,"/readme").permitAll()
-//                .mvcMatchers(HttpMethod.GET,"/error").permitAll()
-//                .mvcMatchers(HttpMethod.GET,"/error").permitAll()
-//                .antMatchers("/user").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+//                .antMatchers("/", "/**").permitAll()
+                .mvcMatchers(HttpMethod.GET,"/readme").permitAll()
+                .mvcMatchers(HttpMethod.GET,"/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterAt(new JWTAuthCheckFilter(authenticationManagerBean(), customUserDetailsService), BasicAuthenticationFilter.class);
+                .addFilterAt(new JWTAuthCheckFilter(authenticationManagerBean(), customUserDetailsService, jwtUtils), BasicAuthenticationFilter.class);
         ;
 
 //        http.apply(new JwtSecurityConfig(jwtTokenProvider));

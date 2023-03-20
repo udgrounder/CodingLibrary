@@ -1,12 +1,10 @@
 package my.example.security.filter;
 
 import lombok.extern.slf4j.Slf4j;
-import my.example.security.model.OpenApiUserDetails;
 import my.example.security.service.CustomUserDetailsService;
-import my.example.security.utils.JwtTokenUtils;
+import my.example.security.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -22,6 +20,7 @@ import java.io.IOException;
 public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
 
     private CustomUserDetailsService customUserDetailsService;
+    private JwtUtils jwtUtils;
 
 
     /**
@@ -31,9 +30,10 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
      *
      * @param authenticationManager the bean to submit authentication requests to
      */
-    public JWTAuthCheckFilter(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService) {
+    public JWTAuthCheckFilter(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtUtils jwtUtils) {
         super(authenticationManager);
         this.customUserDetailsService = customUserDetailsService;
+        this.jwtUtils = jwtUtils;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
 
         String payload = null;
         try {
-            payload = JwtTokenUtils.getPayload(jwtToken);
+            payload = jwtUtils.getPayload(jwtToken);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

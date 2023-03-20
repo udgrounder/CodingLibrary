@@ -5,9 +5,12 @@ spring security 를 사용 하는 프로젝트 샘플
 
 
 
-[JWT SAMPLE ] <https://www.toptal.com/spring/spring-security-tutorial>
-[참고] <https://hou27.tistory.com/entry/Spring-Security-JWT>
-[참고] <https://devjem.tistory.com/72>
+[JWT SAMPLE ] <https://www.toptal.com/spring/spring-security-tutorial>  
+[참고] <https://hou27.tistory.com/entry/Spring-Security-JWT>  
+[참고] <https://devjem.tistory.com/72>  
+[참고] <https://codediary21.tistory.com/m/95>  
+
+
 
 
 

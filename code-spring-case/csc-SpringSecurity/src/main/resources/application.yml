@@ -1,2 +1,9 @@
 server:
   port : 18080
+
+
+
+jwt:
+  token:
+    expirationMs: 7200
+    secretKey: mysecret12mysecret12mysecret1212
