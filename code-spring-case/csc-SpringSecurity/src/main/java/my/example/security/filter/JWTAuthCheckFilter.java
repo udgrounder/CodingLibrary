@@ -1,6 +1,7 @@
 package my.example.security.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import my.example.security.model.AuthUser;
 import my.example.security.service.CustomUserDetailsService;
 import my.example.security.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,11 +53,11 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
 
         log.info("payload : {} ", payload);
 
-        UserDetails openApiUserDetails =   customUserDetailsService.loadUserByUsername("Tester");
+        AuthUser authUser =   (AuthUser) customUserDetailsService.loadUserByUsername("Tester");
 
 //        OpenApiUserDetails openApiUserDetails = new OpenApiUserDetails();
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(openApiUserDetails, "", openApiUserDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authUser.getAuthUserInfo(), "", authUser.getAuthorities());
 
 //        SecurityContextHolder.getContext().setAuthentication(token);
 

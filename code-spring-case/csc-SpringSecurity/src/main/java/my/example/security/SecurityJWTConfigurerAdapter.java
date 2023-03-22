@@ -63,15 +63,15 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
      * @param auth the {@link AuthenticationManagerBuilder} to use
      * @throws Exception
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password(passwordEncoder().encode("user")).roles("USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder().encode("admin")).roles("USER", "ADMIN");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password(passwordEncoder().encode("user")).roles("USER")
+//                .and()
+//                .withUser("admin")
+//                .password(passwordEncoder().encode("admin")).roles("USER", "ADMIN");
+//    }
 
 
     @Bean

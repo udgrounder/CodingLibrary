@@ -2,7 +2,7 @@ package my.example.security.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.example.security.model.OpenApiUserDetails;
+import my.example.security.model.AuthUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,8 +27,17 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // TODO : username 으로 user 가져오기
-        OpenApiUserDetails openApiUserDetails = new OpenApiUserDetails();
-        openApiUserDetails.setUsername(username);
-        return openApiUserDetails;
+//        AuthUser authUser = ;
+//        authUser.setUsername();
+
+        // DB 연결
+
+
+        AuthUser.Info tester = AuthUser.Info.builder()
+                .username("Tester")
+                .password("")
+                .customersType(AuthUser.CustomersType.CAMP)
+                .build();
+        return new AuthUser(tester);
     }
 }

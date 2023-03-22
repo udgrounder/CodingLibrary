@@ -3,7 +3,7 @@ package my.example.security.utils;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import my.example.security.model.OpenApiUserDetails;
+import my.example.security.model.AuthUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -132,7 +132,7 @@ public class JwtUtils {
 
 
     public String generateJwtToken(Authentication authentication) {
-        OpenApiUserDetails userPrincipal = (OpenApiUserDetails) authentication.getPrincipal();
+        AuthUser userPrincipal = (AuthUser) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())

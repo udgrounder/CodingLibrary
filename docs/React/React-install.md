@@ -146,15 +146,17 @@
 - 리액트 코딩 컨벤션 1 : [https://tech.toktokhan.dev/2020/08/30/front-convention/](https://tech.toktokhan.dev/2020/08/30/front-convention/)
 - 리액트 코딩 컨벤션 2 : <https://3-stack.tistory.com/53>  
 - 리액트 코딩 컨벤션 3 : <https://phrygia.github.io/react/2022-04-05-react/>
+- 리액트 코딩 컨벤션 4 : <https://levelup.gitconnected.com/react-code-conventions-and-best-practices-433e23ed69aa>
 - Next.js 설치법  : [https://hong-devbox.tistory.com/11](https://hong-devbox.tistory.com/11)
 - React 설치 : [https://codingapple.com/unit/react1-install-create-react-app-npx/](https://codingapple.com/unit/react1-install-create-react-app-npx/)
 - 빌드 및 배포 : [https://poew.tistory.com/608](https://poew.tistory.com/608)
 - 빌드 및 배포 2 : [https://stroy-jy.tistory.com/32](https://stroy-jy.tistory.com/32)
 - 빌드 및 배포 3 : [https://su-vin25.tistory.com/entry/React-리액트-프로젝트-배포-준비-프로젝트-빌드](https://su-vin25.tistory.com/entry/React-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-%EC%A4%80%EB%B9%84-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B9%8C%EB%93%9C)
+- 빌드 및 배포 4 : [https://su-vin25.tistory.com/entry/React-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-Firebase-Hosting](https://su-vin25.tistory.com/entry/React-%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B0%B0%ED%8F%AC-Firebase-Hosting)  
 - 배포 버전 실행시 포트 번호 변경법 : [https://ryeowon.github.io/posts/ReactJS_deployment/](https://ryeowon.github.io/posts/ReactJS_deployment/)
 - 환경 변수 설정과 실행 환경 분리 : [https://junhyunny.github.io/react/react-env-variable-setting/](https://junhyunny.github.io/react/react-env-variable-setting/)
 - Spring Boot 와 react 연동 : [https://velog.io/@u-nij/Spring-Boot-React.js-개발환경-세팅](https://velog.io/@u-nij/Spring-Boot-React.js-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%84%B8%ED%8C%85)
 - 초보의 react 설치 : [https://zejeworld.tistory.com/109](https://zejeworld.tistory.com/109)  
 - npm 과 npx 차이 <https://basemenks.tistory.com/232>  
 - Container 컴포넌트와 Presentational 컴포넌트 : <https://fe-churi.tistory.com/34>
-- 
+- Spread Operator(스프레드 연산자) : <https://dev-elena-k.tistory.com/28>
