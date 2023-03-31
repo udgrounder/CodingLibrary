@@ -123,3 +123,4 @@ RestApi 가 Get 방식인 경우에 쿼리 파라메터의 타입을 설정하�
 
 
 
+[SpringBoot 테스트 시 @WebMvcTest와 @SpringBootTest의 차이](https://ksh-coding.tistory.com/53)  
