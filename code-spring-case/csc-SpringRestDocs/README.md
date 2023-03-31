@@ -124,3 +124,10 @@ RestApi 가 Get 방식인 경우에 쿼리 파라메터의 타입을 설정하�
 
 
 [SpringBoot 테스트 시 @WebMvcTest와 @SpringBootTest의 차이](https://ksh-coding.tistory.com/53)  
+
+
+
+### 추가 사항
+
+별도 속성으로 값을 설정하고 싶을때 key에다 문서에 작성할 내용을 넣고 value 에 값을 넣은 후에 aoc 문서에서 사용하면 된다.
+.attributes(Attributes.key("additional").value("추가사항입니다"))

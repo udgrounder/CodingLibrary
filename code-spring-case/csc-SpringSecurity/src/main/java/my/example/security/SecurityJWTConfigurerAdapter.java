@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,7 +28,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 )
 public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-//    BasicAuthenticationFilter filter;
+    // security filter 를 타지 않는 url 목록을 만들어 사용한다.
+    private static final String[] WHITE_LIST = {
+            "/readme",
+            "/readme2",
+            "/error"
+    };
+
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -44,9 +51,8 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().and()
                 .authorizeRequests()
-//                .antMatchers("/", "/**").permitAll()
-                .mvcMatchers(HttpMethod.GET,"/readme").permitAll()
-                .mvcMatchers(HttpMethod.GET,"/error").permitAll()
+//                .antMatchers(WHITE_LIST).permitAll()
+//                .mvcMatchers(HttpMethod.GET,WHITE_LIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -57,22 +63,6 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
 //        http.apply(new JwtSecurityConfig(jwtTokenProvider));
         
     }
-
-    /**
-     * Test 용 inmemory user
-     * @param auth the {@link AuthenticationManagerBuilder} to use
-     * @throws Exception
-     */
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user")
-//                .password(passwordEncoder().encode("user")).roles("USER")
-//                .and()
-//                .withUser("admin")
-//                .password(passwordEncoder().encode("admin")).roles("USER", "ADMIN");
-//    }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -85,4 +75,10 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
+    @Override
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring().antMatchers(WHITE_LIST);
+    }
+
 }

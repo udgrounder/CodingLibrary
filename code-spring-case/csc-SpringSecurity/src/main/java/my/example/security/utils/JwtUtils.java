@@ -27,6 +27,8 @@ public class JwtUtils {
     private String secretKey;
 
 
+    private Key key;
+
     public static final String TOKEN_TYPE_BEARER = "BEARER";
 
     public String getPayload(String token) throws RuntimeException {
@@ -79,11 +81,16 @@ public class JwtUtils {
     }
 
 
-    public static Key getSigninKey(String strKey) {
-        byte[] keyBytes = strKey.getBytes(StandardCharsets.UTF_8);
+    public Key getSigninKey(String strKey) {
 
-        return Keys.hmacShaKeyFor(keyBytes);
+        if( key == null ) {
+            byte[] keyBytes = strKey.getBytes(StandardCharsets.UTF_8);
+            key = Keys.hmacShaKeyFor(keyBytes);
+        }
+
+        return key;
     }
+
 
 
 //    public Authentication getAuthentication(String accessToken) {
@@ -137,7 +144,7 @@ public class JwtUtils {
                 .setSubject((userPrincipal.getUsername()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + expirationMs))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .signWith(SignatureAlgorithm.HS512, getSigninKey(secretKey))
                 .compact();
     }
 

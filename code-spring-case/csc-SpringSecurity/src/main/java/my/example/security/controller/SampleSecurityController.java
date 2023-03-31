@@ -36,13 +36,13 @@ public class SampleSecurityController {
 
     @GetMapping("/readme")
     public String pageReadme() {
-        log.info("Call pageReadme {} _{}_ ", cnt++, SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        log.info("Call pageReadme {}  ", cnt++);
         return "pageReadme";
     }
 
     @GetMapping("/readme2")
     public String pageReadme2() {
-        log.info("Call pageReadme2 {} _{}_ ", cnt++, SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        log.info("Call pageReadme2 {}  ", cnt++);
         return "pageReadme2";
     }
 
@@ -50,7 +50,7 @@ public class SampleSecurityController {
 
     @GetMapping("/error")
     public String pageError() {
-        log.info("Call pageError {} _{}_ ", cnt++, SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        log.info("Call pageError {} _", cnt++);
         return "pageError";
     }
 
