@@ -124,6 +124,20 @@ RTK는
     
     npm install redux
 
+### Nextjs with Redux
+
+
+```
+npm i redux
+npm i redux-thunk
+npm i @redux-devtools/extension
+npm i next-redux-wrapper
+
+```
+
+
+[넥스트 with Redux](https://devkkiri.com/post/59cb38dd-f939-462d-9e7f-afcc338b621f)  
+[참조2](https://www.devkkiri.com/post/56578a18-d1fc-4c67-a2c4-6d64e21cf70c)  
 
 
 
@@ -135,6 +149,22 @@ RTK는
 
 
 ### 참조 링크
-[Redux Home](https://ko.redux.js.org/introduction/getting-started/)
+[Redux Home](https://ko.redux.js.org/introduction/getting-started/)  
 [Redux 간단 이해](https://velog.io/@qf9ar8nv/%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%98%88%EC%A0%9C%EB%A5%BC-%ED%86%B5%ED%95%B4-Redux%EB%A5%BC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+
+
+
+# Nomad Study
+
+``` 
+npx create-next-app@latest
+
+=> nextsjs-intro
+
+
+code nextsjs-intro
+
+
+```
+
 
