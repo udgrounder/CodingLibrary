@@ -37,3 +37,28 @@ Stdout 에  기본 계정 패스워드 제공
 
 
 
+### 주의 사항
+
+``` 
+.mvcMatchers(HttpMethod.GET,WHITE_LIST).permitAll()
+```
+
+security config 에서 위의 문법을 사용해도 필터를 동일하게 타게 된다. 
+따라서 필터가 적용 되기 때문에 이 방식으로는 우회해 갈수가 없다.
+그래서 아래와 같은 방법으로 필터 자체를 안타게 해도 된다 
+```
+
+    @Override
+    public void configure(WebSecurity webSecurity) {
+        webSecurity.ignoring().antMatchers(WHITE_LIST);
+    }
+```
+
+또는 해당 필터 에서 token 이 없는 경우 설정을 하지 않도록 처리하는 것도 방법이다. 
+이 방법이 플로우상 맞아 보인다.
+
+
+
+
+
+[인증인가 에러 처리](https://fenderist.tistory.com/344)  

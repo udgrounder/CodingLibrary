@@ -44,20 +44,21 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
         String jwtToken = request.getHeader("Authorization");
         log.info("jwtToken : {}", jwtToken);
 
-        String payload = null;
-        try {
-            payload = jwtUtils.getPayload(jwtToken);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        if ( jwtToken != null) {
+            String payload = null;
+            try {
+                payload = jwtUtils.getPayload(jwtToken);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
-        log.info("payload : {} ", payload);
+            log.info("payload : {} ", payload);
 
-        AuthUser authUser =   (AuthUser) customUserDetailsService.loadUserByUsername("Tester");
+            AuthUser authUser = (AuthUser) customUserDetailsService.loadUserByUsername("Tester");
 
 //        OpenApiUserDetails openApiUserDetails = new OpenApiUserDetails();
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authUser.getAuthUserInfo(), "", authUser.getAuthorities());
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authUser.getAuthUserInfo(), "", authUser.getAuthorities());
 
 //        SecurityContextHolder.getContext().setAuthentication(token);
 
@@ -68,8 +69,8 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
 
 
 //        Authentication auth = jwtTokenProvider.getAuthentication(token);
-        SecurityContextHolder.getContext().setAuthentication(token);
-
+            SecurityContextHolder.getContext().setAuthentication(token);
+        }
 
         chain.doFilter(request,response);
 

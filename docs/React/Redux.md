@@ -167,4 +167,17 @@ code nextsjs-intro
 
 ```
 
+## NextJs React 연동
+
+
+
+
+
+
+### 참조    
+
+[Nextjs 와 Redux 연동](https://devkkiri.com/post/59cb38dd-f939-462d-9e7f-afcc338b621f)   
+[Nextjs : React hydration error](https://velog.io/@juurom/TIL-react-hydration-error-%EC%9B%90%EC%9D%B8-%EB%B0%8F-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95-feat.-react-calendar)  
+
+
 

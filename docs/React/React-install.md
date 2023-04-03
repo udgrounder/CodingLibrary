@@ -139,6 +139,13 @@
 
 
 
+### 주의 사항
+* git 으로 공유시 패키지의 의존성이 정상적으로 설치 되지 않는 것같다. 
+  * 그래서 다시 설치를 진행하였다.
+* 
+
+
+
 참조 링크
 - brew 설치 : <https://brew.sh/index_ko>
 - React : <https://ko.reactjs.org/>
@@ -159,4 +166,7 @@
 - 초보의 react 설치 : [https://zejeworld.tistory.com/109](https://zejeworld.tistory.com/109)  
 - npm 과 npx 차이 <https://basemenks.tistory.com/232>  
 - Container 컴포넌트와 Presentational 컴포넌트 : <https://fe-churi.tistory.com/34>
-- Spread Operator(스프레드 연산자) : <https://dev-elena-k.tistory.com/28>
+- Spread Operator(스프레드 연산자) : <https://dev-elena-k.tistory.com/28>  
+- [node 설치에 대한 내용](https://zibu-story.tistory.com/151)  
+-  
+- 
