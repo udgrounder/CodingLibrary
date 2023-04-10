@@ -1,151 +1,126 @@
-package my.example.security.utils;
+package com.yagaja.papi.openApi.auth.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import my.example.security.model.AuthUser;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import my.example.security.exception.JWTException;
+import my.example.security.exception.RestApiErrorCode;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
-@Component
 public class JwtUtils {
 
 
-//    private static final Algorithm ALGORITHM = Algorithm.HMAC256("asdfasdfasdfasdfwersdfwer");
-
-
-    @Value("${jwt.token.expirationMs}")
-    private int expirationMs;
-
-    @Value("${jwt.token.secretKey}")
-    private String secretKey;
-
-
-    private Key key;
 
     public static final String TOKEN_TYPE_BEARER = "BEARER";
 
-    public String getPayload(String token) throws RuntimeException {
-
-        if(token == null ) {
-            throw new RuntimeException("유효하지 않는 토큰 입니다." );
-        }
-
-        String[] tokens = token.split(" ");
-
-        if ( tokens.length != 2 || !TOKEN_TYPE_BEARER.equals( tokens[0].toUpperCase())) {
-            throw new RuntimeException("유효하지 않는 토큰 입니다." );
-        }
-
-        log.info("only token _{}_" , tokens[1]);
-
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigninKey(secretKey))
-                .build()
-                .parseClaimsJws(tokens[1])
-                .getBody()
-                .toString()
-                ;
+    private JwtUtils() {
+        throw new IllegalStateException("Utility class");
     }
 
-    // 토큰 payload 에서 원하는 값 꺼내기
-    public static String getPayloadClaim(String token, String claimName) {
+    public static String getPayload(@NonNull String authHeader, Key key) throws JWTException {
+
+        String token = getToken(authHeader);
+
         return Jwts.parserBuilder()
-//                .setSigningKey(authInfo.getSecretKey())
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .get(claimName, String.class);
+                .toString()
+                ;
+
+    }
+
+    // 토큰 payload 에서 원하는 값 꺼내기
+    public static String getPayloadClaim(@NonNull String authHeader, @NonNull String claimName, Key key) throws JWTException {
+
+        String token = getToken(authHeader);
+
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get(claimName, String.class);
+        } catch(ExpiredJwtException e) {
+            throw  new JWTException(e, RestApiErrorCode.AUTH_TOKEN_EXPIRED_ERROR);
+        } catch(UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SecurityException e) {
+            throw  new JWTException(e, RestApiErrorCode.AUTH_TOKEN_FORMAT_INVALID_ERROR);
+        } catch (Exception e) {
+            throw new JWTException(e, RestApiErrorCode.AUTH_TOKEN_ERROR);
+        }
     }
 
     // 토큰 유효성 검사, 유효 기간 확인
-    public static void validateToken(String jwtToken) {
+    public static void validateToken(@NonNull String authHeader, Key key) throws JWTException {
+
+        String token = getToken(authHeader);
+
         try {
             Jwts.parserBuilder()
-//                    .setSigningKey(authInfo.getSecretKey())
+                    .setSigningKey(key)
                     .build()
-                    .parseClaimsJws(jwtToken)
+                    .parseClaimsJws(token)
                     .getBody();
-
-        } catch(ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SecurityException | IllegalArgumentException e) {
-            log.error(e.getMessage(), e);
-//            throw new E("유효하지 않은 인증토큰입니다.");
-            throw  e;
+        } catch(ExpiredJwtException e) {
+            throw  new JWTException(e, RestApiErrorCode.AUTH_TOKEN_EXPIRED_ERROR);
+        } catch(UnsupportedJwtException | MalformedJwtException | IllegalArgumentException | SecurityException e) {
+            throw  new JWTException(e, RestApiErrorCode.AUTH_TOKEN_FORMAT_INVALID_ERROR);
+        } catch (Exception e) {
+            throw new JWTException(e, RestApiErrorCode.AUTH_TOKEN_ERROR);
         }
     }
 
 
-    public Key getSigninKey(String strKey) {
+    public static Key getSigninKey(String strKey) {
 
-        if( key == null ) {
-            byte[] keyBytes = strKey.getBytes(StandardCharsets.UTF_8);
-            key = Keys.hmacShaKeyFor(keyBytes);
-        }
+        byte[] keyBytes = strKey.getBytes(StandardCharsets.UTF_8);
 
-        return key;
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
 
+    public static String generateJwtToken(String userName, Map<String, Object> calims, Key key, Long expirationMs) {
 
-//    public Authentication getAuthentication(String accessToken) {
-//        // 토큰 복호화
-//        Claims claims = parseClaims(accessToken);
-//
-//        if (claims.get("auth") == null) {
-//            throw new RuntimeException("권한 정보가 없는 토큰입니다.");
-//        }
-//
-//        // 클레임에서 권한 정보 가져오기
-//        Collection<? extends GrantedAuthority> authorities =
-//                Arrays.stream(claims.get("auth").toString().split(","))
-//                        .map(SimpleGrantedAuthority::new)
-//                        .collect(Collectors.toList());
-//
-//        // UserDetails 객체를 만들어서 Authentication 리턴
-//        UserDetails principal = new User(claims.getSubject(), "", authorities);
-//        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
-//    }
-//
-//
-//    private Claims parseClaims(String accessToken) {
-//        try {
-//            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();
-//        } catch (ExpiredJwtException e) {
-//            return e.getClaims();
-//        }
-//    }
+        Date now = new Date();
+        return Jwts.builder()
+                .setSubject(userName)
+                .setIssuedAt(now)
+                .setClaims(calims)
+                .setExpiration(new Date(now.getTime() + expirationMs))
+                .signWith(key, SignatureAlgorithm.HS256)
+
+                .compact();
+    }
 
 
-    /*
-
-
-    {
-  "auth": "CAMP,AGENCY,CHANNEL",
-  "campId": "1234",
-  "agencyId": "1234",
-  "channelId": "1234",
-  "campName": "종이컵캠핑장",
-  "iat": 1516239022
-}
-
-
+    /**
+     * Utils 성 Method
      */
 
+    /**
+     * Auth Header String 에서 JWT 문자열만 추출한다.
+     * @param authHeader
+     * @return
+     */
+    public static String getToken(String authHeader) throws JWTException {
 
-    public String generateJwtToken(Authentication authentication) {
-        AuthUser userPrincipal = (AuthUser) authentication.getPrincipal();
-        return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + expirationMs))
-                .signWith(SignatureAlgorithm.HS512, getSigninKey(secretKey))
-                .compact();
+        String[] tokens = authHeader.split(" ");
+
+        if ( tokens.length != 2 || !TOKEN_TYPE_BEARER.equalsIgnoreCase( tokens[0])) {
+            log.error("Token Error - AuthHeader : {}", authHeader);
+            throw new JWTException(RestApiErrorCode.AUTH_TOKEN_FORMAT_INVALID_ERROR);
+        }
+
+        return tokens[1];
     }
 
 

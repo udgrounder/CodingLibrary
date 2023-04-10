@@ -40,4 +40,21 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .build();
         return new AuthUser(tester);
     }
+
+
+    public UserDetails loadUserByToken(String username) throws UsernameNotFoundException {
+        // TODO : username 으로 user 가져오기
+//        AuthUser authUser = ;
+//        authUser.setUsername();
+
+        // DB 연결
+
+
+        AuthUser.Info tester = AuthUser.Info.builder()
+                .username("Tester")
+                .password("")
+                .customersType(AuthUser.CustomersType.CAMP)
+                .build();
+        return new AuthUser(tester);
+    }
 }

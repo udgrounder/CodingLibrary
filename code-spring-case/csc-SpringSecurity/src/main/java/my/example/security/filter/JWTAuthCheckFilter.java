@@ -1,13 +1,14 @@
 package my.example.security.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import my.example.security.api.RestApiInfo;
+import my.example.security.exception.JWTException;
+import my.example.security.exception.RestApiException;
 import my.example.security.model.AuthUser;
 import my.example.security.service.CustomUserDetailsService;
-import my.example.security.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -21,7 +22,8 @@ import java.io.IOException;
 public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
 
     private CustomUserDetailsService customUserDetailsService;
-    private JwtUtils jwtUtils;
+
+    private RestApiInfo restApiInfo;
 
 
     /**
@@ -31,45 +33,40 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
      *
      * @param authenticationManager the bean to submit authentication requests to
      */
-    public JWTAuthCheckFilter(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, JwtUtils jwtUtils) {
+    public JWTAuthCheckFilter(AuthenticationManager authenticationManager, CustomUserDetailsService customUserDetailsService, RestApiInfo restApiInfo) {
         super(authenticationManager);
         this.customUserDetailsService = customUserDetailsService;
-        this.jwtUtils = jwtUtils;
+        this.restApiInfo = restApiInfo;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 //        super.doFilterInternal(request, response, chain);
 
-        String jwtToken = request.getHeader("Authorization");
-        log.info("jwtToken : {}", jwtToken);
+        String authHeader = request.getHeader("Authorization");
+        log.debug("jwtToken : {}", authHeader);
 
-        if ( jwtToken != null) {
-            String payload = null;
+        // token 이 없으면 인증을 설정 처리 하지 않는다.
+        if ( authHeader != null ) {
+
+            // 검증을 위해서 토큰에서 accountId 추출
+            String accountId = com.yagaja.papi.openApi.auth.utils.JwtUtils.getPayloadClaim(authHeader, "CLAIMNAME", restApiInfo.getKey());
+            log.info("accountId : {}", accountId);
+
+            // Token validatiaon
+            com.yagaja.papi.openApi.auth.utils.JwtUtils.validateToken(authHeader, restApiInfo.getKey());
+
+            // 사용자 정보설정
+            AuthUser authUser;
+
             try {
-                payload = jwtUtils.getPayload(jwtToken);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+                authUser = (AuthUser) customUserDetailsService.loadUserByToken("accountId");
+            } catch (RestApiException e) {
+                throw new JWTException(e, e.getErrorCode());
             }
 
-            log.info("payload : {} ", payload);
-
-            AuthUser authUser = (AuthUser) customUserDetailsService.loadUserByUsername("Tester");
-
-//        OpenApiUserDetails openApiUserDetails = new OpenApiUserDetails();
-
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authUser.getAuthUserInfo(), "", authUser.getAuthorities());
-
-//        SecurityContextHolder.getContext().setAuthentication(token);
-
-//        tring username = Jwts.parser().setSigningKey(secret_key).parseClaimsJws(token).getBody().getSubject();
-//        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-//        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-
-
-//        Authentication auth = jwtTokenProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(token);
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(authUser.getAuthUserInfo(), "", authUser.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
 
         chain.doFilter(request,response);

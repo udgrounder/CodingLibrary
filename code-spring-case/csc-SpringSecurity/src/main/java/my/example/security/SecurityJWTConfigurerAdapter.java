@@ -1,9 +1,11 @@
 package my.example.security;
 
+import my.example.security.api.RestApiInfo;
 import my.example.security.filter.JWTAuthCheckFilter;
+import my.example.security.filter.JWTExceptionHandlerFilter;
 import my.example.security.service.CustomUserDetailsService;
-import my.example.security.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -49,8 +51,19 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
     private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    private JwtUtils jwtUtils;
+    private RestApiInfo restApiInfo;
 
+
+    @Autowired
+    @Qualifier("customAuthenticationEntryPoint")
+    AuthenticationEntryPoint authEntryPoint;
+
+    @Autowired
+    @Qualifier("customAccessDeniedHandler")
+    AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private JWTExceptionHandlerFilter jwtExceptionHandlerFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -66,11 +79,14 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilterAt(new JWTAuthCheckFilter(authenticationManagerBean(), customUserDetailsService, jwtUtils), BasicAuthenticationFilter.class);
-        http
+                .addFilterAt(new JWTAuthCheckFilter(authenticationManagerBean(), customUserDetailsService, restApiInfo), BasicAuthenticationFilter.class)
+                .addFilterBefore(jwtExceptionHandlerFilter, JWTAuthCheckFilter.class)
+//        http
                 .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendRedirect("/api/auth/failed"))
-                .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/api/access/denied"));
+//                .authenticationEntryPoint((request, response, authException) -> response.sendRedirect("/api/auth/failed"))
+//                .accessDeniedHandler((request, response, accessDeniedException) -> response.sendRedirect("/api/access/denied"));
+                .authenticationEntryPoint(authEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler);
 
 
 //        http.apply(new JwtSecurityConfig(jwtTokenProvider));
