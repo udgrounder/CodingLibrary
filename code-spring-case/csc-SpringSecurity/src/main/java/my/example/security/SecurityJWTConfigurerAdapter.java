@@ -1,6 +1,8 @@
 package my.example.security;
 
 import my.example.security.api.RestApiInfo;
+import my.example.security.component.CustomAccessDeniedHandler;
+import my.example.security.component.CustomAuthenticationEntryPoint;
 import my.example.security.filter.JWTAuthCheckFilter;
 import my.example.security.filter.JWTExceptionHandlerFilter;
 import my.example.security.service.CustomUserDetailsService;
@@ -55,12 +57,10 @@ public class SecurityJWTConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    @Qualifier("customAuthenticationEntryPoint")
-    AuthenticationEntryPoint authEntryPoint;
+    CustomAuthenticationEntryPoint authEntryPoint;
 
     @Autowired
-    @Qualifier("customAccessDeniedHandler")
-    AccessDeniedHandler accessDeniedHandler;
+    CustomAccessDeniedHandler accessDeniedHandler;
 
     @Autowired
     private JWTExceptionHandlerFilter jwtExceptionHandlerFilter;

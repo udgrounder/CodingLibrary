@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@Component("customAuthenticationEntryPoint")
+@Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 //    @Autowired
     private ObjectMapper mapper = new ObjectMapper();
