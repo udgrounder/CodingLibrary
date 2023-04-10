@@ -6,6 +6,7 @@ import my.example.security.exception.JWTException;
 import my.example.security.exception.RestApiException;
 import my.example.security.model.AuthUser;
 import my.example.security.service.CustomUserDetailsService;
+import my.example.security.utils.JwtUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,11 +51,11 @@ public class JWTAuthCheckFilter extends BasicAuthenticationFilter {
         if ( authHeader != null ) {
 
             // 검증을 위해서 토큰에서 accountId 추출
-            String accountId = com.yagaja.papi.openApi.auth.utils.JwtUtils.getPayloadClaim(authHeader, "CLAIMNAME", restApiInfo.getKey());
+            String accountId = JwtUtils.getPayloadClaim(authHeader, "CLAIMNAME", restApiInfo.getKey());
             log.info("accountId : {}", accountId);
 
             // Token validatiaon
-            com.yagaja.papi.openApi.auth.utils.JwtUtils.validateToken(authHeader, restApiInfo.getKey());
+            JwtUtils.validateToken(authHeader, restApiInfo.getKey());
 
             // 사용자 정보설정
             AuthUser authUser;

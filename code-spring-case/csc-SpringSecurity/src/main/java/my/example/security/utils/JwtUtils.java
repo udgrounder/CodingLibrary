@@ -1,4 +1,4 @@
-package com.yagaja.papi.openApi.auth.utils;
+package my.example.security.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

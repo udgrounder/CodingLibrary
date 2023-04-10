@@ -1,10 +1,10 @@
 package my.example.security.api;
 
 
-import com.yagaja.papi.openApi.auth.utils.JwtUtils;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import my.example.security.utils.JwtUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
