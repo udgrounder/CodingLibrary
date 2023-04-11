@@ -17,18 +17,16 @@ vi .gitconfig-personal
   signingkey = yourkeyXXXXXXXXXXX
   
 ```
-2. ~/.gitconfig 설정에 개인 설정을 추가 한다.
+2. ~/.gitconfig 설정의 [user] 설정 밑에 개인 설정을 추가 한다.
 ```shell
 [includeIf "gitdir:~/Study/"]
   path = .gitconfig-personal
 
 
 ```
-3. 
 
-
-* 주의 사항 개인 계정으로 하는것은  특정 폴더에 몰아 넣고 설정하는 것이 좋다. 난 Study 폴더를 사용 하였다. 
-
+* 주의 사항 별도 계정 으로 하는 것은  특정 폴더에 몰아 넣고 설정 하는 것이 좋다. 
+* 난 공부를 목적으로 했기 때문에 Study 폴더를 사용 하였다. 
 
 [Git 계정 여러 개 동시 사용하기](https://blog.outsider.ne.kr/1448)  
 
