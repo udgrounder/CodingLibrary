@@ -82,11 +82,14 @@ subProjectList.each { subProject ->
     def isBootWar = subProject.type == 'bootWar' ? true : false
     def isBootJar = subProject.type == 'bootJar' ? true : false
     def isNode = subProject.type == 'node' ? true : false
+    def isOther = subProject.type == 'other' ? true : false
 
     def projectName = ":${subProject.name}"
 
-    if (isNode) {
+    if (isNode || isOther ) {
         // node task run
+    } else {
+
     }
 
 //    if ( isJar || isBootWar || isBootJar) {
@@ -100,13 +103,13 @@ subProjectList.each { subProject ->
 //        }
 //    }
 
-
     project(projectName) {
         jar.enabled(isJar)
         bootJar.enabled(isBootJar)
         bootWar.enabled(isBootWar)
-        if(isNode) bootJar.enabled(isBootJar)
     }
+
+
 }
 
 

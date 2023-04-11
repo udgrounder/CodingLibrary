@@ -20,6 +20,8 @@ def group = parsedJson.group
 // Sub Project Settings
 subProjectList.each { subProject ->
 
+    //////////////////////////////
+    // 공통 처리 사항
     println("# settings.gradle # projectName: ${subProject.name}")
 
     // group 폴더 생성
@@ -28,38 +30,16 @@ subProjectList.each { subProject ->
         groupDir.mkdirs()
     }
 
-    // group-build.gradle 파일이 생성
-    def groupGradleFile = new File(rootDir, "${subProject.group}/${subProject.group}-build.gradle")
-
-    if (!groupGradleFile.exists()) {
-        groupGradleFile.text = """
-            dependencies {
-            
-            }
-        """.stripIndent()
-    }
-
     // group readme.md file
     def groupReadmeFile = new File(groupDir, "README.md")
     if (!groupReadmeFile.exists()) {
         groupReadmeFile.text = "# ${subProject.group}"
     }
 
-
     // 프로젝트 폴더 생성
     def projDir = new File(rootDir, "${subProject.group}/${subProject.name}")
     if (!projDir.exists()) {
         projDir.mkdirs()
-    }
-
-    // build.gradle 파일이 없으면 생성
-    def gradleFile = new File(projDir, "build.gradle")
-    if (!gradleFile.exists()) {
-        gradleFile.text = """apply from: '../""" +  groupGradleFile.name + """'
-        dependencies {
-            
-        }
-        """.stripIndent()
     }
 
     // project readme.md file
@@ -68,35 +48,73 @@ subProjectList.each { subProject ->
         projReadmeFile.text = "# ${subProject.name}"
     }
 
-    // 폴더 리스트를 작성합니다.
-    def workDirList = [
-            "src/main/java/${group}/${subProject.rootPkg}",
-            "src/test/java/${group}/${subProject.rootPkg}",
-            "src/main/resources",
-            "src/main/resources/static",
-            "src/main/resources/templates",
-            "src/test/resources",
-    ]
 
-    // 작업 폴더를 생성합니다.
-    workDirList.each { srcDir ->
-        def srcFolder = new File(projDir, srcDir)
-        if (!srcFolder.exists()) {
-            srcFolder.mkdirs()
+    ///////////////////////////
+    // 타입별 처리 사항
+
+    def isJar = subProject.type == 'jar' ? true : false
+    def isBootWar = subProject.type == 'bootWar' ? true : false
+    def isBootJar = subProject.type == 'bootJar' ? true : false
+    def isNode = subProject.type == 'node' ? true : false
+    def isOther = subProject.type == 'other' ? true : false
+
+
+    if ( isJar || isBootJar || isBootWar ) {
+        // group-build.gradle 파일이 생성
+        def groupGradleFile = new File(rootDir, "${subProject.group}/${subProject.group}-build.gradle")
+
+        if (!groupGradleFile.exists()) {
+            groupGradleFile.text = """
+            dependencies {
+            
+            }
+        """.stripIndent()
+        }
+
+        // build.gradle 파일이 없으면 생성
+        def gradleFile = new File(projDir, "build.gradle")
+        if (!gradleFile.exists()) {
+            gradleFile.text = """apply from: '../""" + groupGradleFile.name + """'
+        dependencies {
+            
+        }
+        """.stripIndent()
+        }
+
+        def rootPkg = "${subProject.rootPkg}".replaceAll("[.]", "/");
+        def groupPkg = "${group}".replaceAll("[.]", "/");
+        println("# settings.gradle # rootPkg: ${rootPkg}")
+        // 폴더 리스트를 작성합니다.
+        def workDirList = [
+                "src/main/java/${groupPkg}/${rootPkg}",
+                "src/test/java/${groupPkg}/${rootPkg}",
+                "src/main/resources",
+                "src/main/resources/static",
+                "src/main/resources/templates",
+                "src/test/resources",
+        ]
+
+        // 작업 폴더를 생성합니다.
+        workDirList.each { srcDir ->
+            def srcFolder = new File(projDir, srcDir)
+            if (!srcFolder.exists()) {
+                srcFolder.mkdirs()
+            }
+        }
+
+        // 필요한 파일을 생성
+        def workFileList = [
+                "src/main/resources/application.yml"
+        ]
+
+        workFileList.each { srcDir ->
+            def srcFile = new File(projDir, srcDir)
+            if (!srcFile.exists()) {
+                srcFile.text = ""
+            }
         }
     }
 
-    // 필요한 파일을 생성
-    def workFileList = [
-            "src/main/resources/application.yml"
-    ]
-
-    workFileList.each { srcDir ->
-        def srcFile = new File(projDir, srcDir)
-        if (!srcFile.exists()) {
-            srcFile.text = ""
-        }
-    }
 
     def projectName = ":${subProject.name}"
     println("# settings.gradle # projectName: ${projectName}")

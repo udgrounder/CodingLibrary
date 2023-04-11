@@ -31,7 +31,8 @@ pagkageInfo.json 파일을 설정하고 build 하면 설정된데로 서브 프�
 * jar : java jar module
 * bootWar : spring bootable war
 * bootJar : spring bootable jar 
-* node : node project (not support)
+* node : node project - 기본 폴더만 만든다.
+* other : 다른 프로젝트 - 기본 폴더만 만든다.
 
 
 
