@@ -170,7 +170,7 @@ json 과 kinesis를 사용 하는 경우 아래와 같이 build.gradle에 lib를
 ```yaml
 logging:
   level:
-    com.yagaja: DEBUG
+    com.package: DEBUG
 ```
 
 
