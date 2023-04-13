@@ -182,3 +182,5 @@ console.log(typeof foo); // boolean
 [javaScript and TypeScript 차이점 1](https://velog.io/@pluviabc1/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%99%80-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%B0%A8%EC%9D%B4%EC%A0%90)  
 [javaScript and TypeScript 차이점 2](https://choseongho93.tistory.com/319)  
 [Typescript 공부 방법 - Good](https://yozm.wishket.com/magazine/detail/1376/)  
+[Typescript에서 효과적으로 상수 관리하기](https://blog.toycrane.xyz/typescript%EC%97%90%EC%84%9C-%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%83%81%EC%88%98-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0-e926db079f9)   
+
