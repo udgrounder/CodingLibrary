@@ -19,6 +19,9 @@
 * Generate Test Class : Press ⇧⌘T (macOS)
 * Override Method(Implement) : Ctrl + o
 * 리턴값 객체 생성 : Option + Cmd + v
+* Class hierarchy : Cmd + Option + u
+
+
 
 
 

@@ -171,6 +171,14 @@ code nextsjs-intro
 
 
 
+### 정리 사항
+내용을 보다 보면 설명을 봐도 이해 하기 어려운 부분이 자주 보인다. 
+소스가 어려운것도 아닌데 이해하기 어렵다면 주로 소스가 생략이 되서 프레임웍이 알아서 해주는 케이스가 많았다. 
+그래서 결국 그 생략된 관계를 파악하고 이해 하는게 중요하다. 
+아래 createSlice 를 사용하면 소스가 많이 줄어 든다는 블로그가 있다. 
+이런 케이스가 그런 케이스 중에 하나이다. 
+소스가 줄어 든다는 것은 동일하게 만들어 사용되는 것을 규칙으로 공식 화해 더이상 두개를 만들지 않게 하는 경우가 많다.
+하나의 선언으로 자동으로 설정을 해주는 경우가 많다.
 
 
 
@@ -178,6 +186,8 @@ code nextsjs-intro
 
 [Nextjs 와 Redux 연동](https://devkkiri.com/post/59cb38dd-f939-462d-9e7f-afcc338b621f)   
 [Nextjs : React hydration error](https://velog.io/@juurom/TIL-react-hydration-error-%EC%9B%90%EC%9D%B8-%EB%B0%8F-%ED%95%B4%EA%B2%B0%EB%B0%A9%EB%B2%95-feat.-react-calendar)  
+[Redux 기초 개념](https://developerntraveler.tistory.com/144)   
+[Redux Toolkit - createSlice 알아보기](https://velog.io/@goonerholic/Redux-Toolkit-createSlice-%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0)  
 
 
 

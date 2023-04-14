@@ -6,17 +6,30 @@ kinesis 를 통해서 바로 aws로 전송하는 방법도 추가 하여 향후 
 
 json 과 kinesis를 사용 하는 경우 아래와 같이 build.gradle에 lib를 추가 해줘야 한다.
 * 참고로 logstash 를 사용하면 mdc 내부 객체를 밖으로 꺼내 준다. (꽤 편리 하다.)
+* kinesis 를 사용하려면 aws 에서 키를 발급 받아서 설정 해야 한다.
+
+~/.aws/credentials 파일을 생성
+
+```shell
+cd ~/.aws
+cat credentials
+--------------
+[default]
+aws_access_key_id=_AWS_ACCESS_KEY_ID_
+aws_secret_access_key=_AWS_SECRET_ASSESS_KEY_
+
+```
 
 ```groovy
-		// logback to json
-		implementation group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
-		implementation group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
+    // logback to json
+    implementation group: 'ch.qos.logback.contrib', name: 'logback-jackson', version: '0.1.5'
+    implementation group: 'ch.qos.logback.contrib', name: 'logback-json-classic', version: '0.1.5'
 
-		// log for json use logstash
-		implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.2'
+    // log for json use logstash
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.2'
 
-		// logback to kinesis
-		implementation group: 'com.gu', name: 'kinesis-logback-appender', version: '2.1.1'
+    // logback to kinesis
+    implementation group: 'com.gu', name: 'kinesis-logback-appender', version: '2.1.1'
 ```
 
 
