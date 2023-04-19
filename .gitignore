@@ -40,5 +40,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-.idea/sonarlint/issuestore/index.pb
-.idea/sonarlint/securityhotspotstore/index.pb
+.idea/sonarlint/issuestore/
+.idea/sonarlint/securityhotspotstore/
+
