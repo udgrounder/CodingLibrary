@@ -53,6 +53,8 @@ POST 성공시 201
 유효성검증 실패 - 400
 
 인증/인가 실패 - 401, 403
+* 401 : 클라이언트가 인증되지 않았 거나 유효한 인증 정보가 부족 하여 인증이 거부된 상태 -> 로그인 하세요.
+* 403 : 인증은 되었으나 권한이 없어서 거부된 상태 -> 등급이 낮아 접근 권한이 없습니다.
 
 리소스 없을시 - 404
 
@@ -72,4 +74,6 @@ POST 성공시 201
 [응답 보내기](https://devlog-wjdrbs96.tistory.com/197)  
 [응답 코드](https://jaeseongdev.github.io/development/2021/04/22/REST_API%EC%97%90%EC%84%9C%EC%9D%98_HTTP_%EC%83%81%ED%83%9C%EC%BD%94%EB%93%9C_%EC%83%81%ED%83%9C%EB%A9%94%EC%8B%9C%EC%A7%80.md/)  
 [azure 에러 상태 코드](https://learn.microsoft.com/ko-kr/rest/api/searchservice/http-status-codes)
+[HTTP 상태 401(Unauthorized) vs 403(Forbidden) 차이](https://mangkyu.tistory.com/146)  
+
 
