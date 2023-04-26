@@ -16,10 +16,23 @@
 React는 상태 관련 로직을 공유하기 위해 좀 더 좋은 기초 요소가 필요했습니다.
 Hook을 사용하면 컴포넌트로부터 상태 관련 로직을 추상화할 수 있습니다. 이를 이용해 독립적인 테스트와 재사용이 가능합니다. Hook은 계층의 변화 없이 상태 관련 로직을 재사용할 수 있도록 도와줍니다. 이것은 많은 컴포넌트 혹은 커뮤니티 사이에서 Hook을 공유하기 쉽게 만들어줍니다.
 => 말이 어렵네...   
-
+Hook은 class를 작성하지 않고도 state와 다른 React의 기능들을 사용할 수 있도록 해줍니다.  
 Hook은 함수 컴포넌트에서 React state와 생명주기 기능(lifecycle features)을 “연동(hook into)“할 수 있게 해주는 함수입니다. Hook은 class 안에서는 동작하지 않습니다. 대신 class 없이 React를 사용할 수 있게 해주는 것입니다.
 
+Hook은 JavaScript 함수입니다. 하지만 Hook을 사용할 때는 두 가지 규칙을 준수해야 합니다. 우리는 이러한 규칙들을 자동으로 강제하기 위한 linter 플러그인을 제공하고 있습니다.
 
+### 최상위(at the Top Level)에서만 Hook을 호출해야 합니다
+반복문, 조건문 혹은 중첩된 함수 내에서 Hook을 호출하지 마세요. 
+대신 early return이 실행되기 전에 항상 React 함수의 최상위(at the top level)에서 Hook을 호출해야 합니다. 
+이 규칙을 따르면 컴포넌트가 렌더링 될 때마다 항상 동일한 순서로 Hook이 호출되는 것이 보장됩니다. 
+이러한 점은 React가 useState 와 useEffect 가 여러 번 호출되는 중에도 Hook의 상태를 올바르게 유지할 수 있도록 해줍니다.
+
+### 오직 React 함수 내에서 Hook을 호출해야 합니다
+Hook을 일반적인 JavaScript 함수에서 호출하지 마세요. 대신 아래와 같이 호출할 수 있습니다.
+
+✅ React 함수 컴포넌트에서 Hook을 호출하세요.  
+✅ Custom Hook에서 Hook을 호출하세요. (다음 페이지에서 이 부분을 살펴볼 예정입니다)
+이 규칙을 지키면 컴포넌트의 모든 상태 관련 로직을 소스코드에서 명확하게 보이도록 할 수 있습니다.
 
 ### 참조 링크 
 * [react hook 이란](https://ko.legacy.reactjs.org/docs/hooks-intro.html)   
