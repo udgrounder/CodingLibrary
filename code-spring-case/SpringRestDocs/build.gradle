@@ -1,5 +1,0 @@
-apply from: '../code-spring-case-build.gradle'
-        dependencies {
-            
-        }
-        
