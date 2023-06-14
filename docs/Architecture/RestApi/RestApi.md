@@ -7,9 +7,41 @@
 [Rest api](https://thalals.tistory.com/335)
 
 
+## method 별 사용 케이스 
 
+POST
+* 생성
+* 프로세스 처리
+* on / off 같은 명령
+* 단 이미 존재 하면 에러
 
-## 데이터 업데이트 전략
+GET
+* 조회
+
+PUT
+* 기존의 것을 대체 한다.
+* 만약 해당하는 리소스가 없으면 생성 한다.
+* 부분 값을 처리 하지 않고 모든 값을 대체 한다. => 값이 없는 경우 값을 지운다.
+ 
+
+PATCH
+* update
+* partial update
+* 기존의 것을 값을 바꾼다. 명확하게 들어온 값에 대해서만 변경한다.
+* 리소스가 없으면 에러  
+
+DELETE
+* delete
+* 리소스가 없으면 에러   
+
+### 참조 링크  
+[POST 와 PUT](https://kingjakeu.github.io/study/2020/07/15/http-post-put/)  
+[HTTP Method](https://velog.io/@jewon119/TIL00.-HTTP-HTTP-Method)   
+  
+  
+  
+  
+## patch 를 이용한 데이터 업데이트 방식
 
 jsonpatch 와 jsonmergepatch 
 
@@ -812,6 +844,7 @@ private Integer age;
 [Rest api patch](https://hhjeong.tistory.com/190)  
 [jsonmergepath](https://jsonobject.tistory.com/622)   
 [Using JSON Patch in Spring REST APIs](https://www.baeldung.com/spring-rest-json-patch)  
+[Spring Boot, JsonNullable을 이용하여 HTTP PATCH 구현하기](https://jsonobject.tistory.com/622)  
 
 
 
