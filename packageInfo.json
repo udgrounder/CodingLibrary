@@ -17,8 +17,20 @@
     },
     {
       "group": "code-spring-case",
-      "name": "SpringRestDocs",
+      "name": "csc-SpringRestDocs",
       "rootPkg": "restdocs",
+      "type": "bootJar"
+    },
+    {
+      "group": "code-spring-case",
+      "name": "csc-SpringScheduled",
+      "rootPkg": "scheduled",
+      "type": "bootJar"
+    },
+    {
+      "group": "code-spring-case",
+      "name": "csc-SpringRestApi",
+      "rootPkg": "restapi",
       "type": "bootJar"
     },
     {

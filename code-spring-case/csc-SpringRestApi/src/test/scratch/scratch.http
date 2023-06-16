@@ -1,0 +1,61 @@
+
+
+
+## server
+
+###
+GET http://localhost:18081/restapi-server/user
+
+###
+POST http://localhost:18081/restapi-server/user
+Content-Type: application/json
+
+{
+  "name": "알거없다",
+  "age": 10,
+  "nickname": "별거없다",
+  "address": {
+    "oldAddress": "사는데가 뭐가 중요해",
+    "newAddress": "몹시 아프구"
+  }
+}
+
+
+###
+PUT http://localhost:18081/restapi-server/user
+Content-Type: application/json
+
+{
+  "name": "알거없다니깐",
+  "age": null,
+
+  "address": {
+    "oldAddress": "사는데가 뭐가 중요하냐니깐",
+    "newAddress": "몹시 아프구 시로"
+  }
+}
+
+
+###
+PATCH http://localhost:18081/restapi-server/user
+Content-Type: application/json
+
+{
+  "age": null,
+  "nickname": "별거없다니깐",
+  "address": {
+    "newAddress": null
+  }
+}
+
+###
+DELETE http://localhost:18081/restapi-server/user
+
+
+
+
+
+
+
+###
+GET http://localhost:18081/api/camp/v1/booking?ordererName=홍길동&phoneNumber=01012341234&checkInDate=20230101

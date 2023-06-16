@@ -4,13 +4,14 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/code-spring-case/SpringRestDocs" />
             <option value="$PROJECT_DIR$/code-spring-case/csc-HttpHeaderConverter" />
+            <option value="$PROJECT_DIR$/code-spring-case/csc-SpringRestApi" />
+            <option value="$PROJECT_DIR$/code-spring-case/csc-SpringRestDocs" />
+            <option value="$PROJECT_DIR$/code-spring-case/csc-SpringScheduled" />
             <option value="$PROJECT_DIR$/code-spring-case/csc-SpringSecurity" />
             <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-common" />
             <option value="$PROJECT_DIR$/study-cpt-sulzip/sc-sulzip-serving-api" />
