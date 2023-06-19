@@ -1,4 +1,4 @@
-package my.example.restapi.server.advice;
+package my.example.restapi.client.advice;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestControllerAdvice(basePackages = {"my.example.restapi.server.controller"})
-public class RestApiServerExceptionAdvice {
+@RestControllerAdvice(basePackages = {"my.example.restapi.client.controller"})
+public class RestApiClientExceptionAdvice {
 
     @ExceptionHandler(OpenApiException.class)
     public ResponseEntity<ApiErrorResponse> handleOpenApiException(OpenApiException ex){

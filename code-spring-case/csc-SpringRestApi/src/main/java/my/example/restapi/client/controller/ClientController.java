@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.example.restapi.client.config.ClientApiCaller;
 import my.example.restapi.exception.ApiErrorResponse;
+import my.example.restapi.exception.OpenApiErrorCode;
+import my.example.restapi.exception.OpenApiException;
 import my.example.restapi.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +38,21 @@ public class ClientController {
 
         Response<okhttp3.ResponseBody> execute = responseCall.execute();
         okhttp3.ResponseBody res = execute.body();
-        log.debug("# response postUser : {}", res);
+        if ( !execute.isSuccessful() ) {
+            if( HttpStatus.CONFLICT.value() == execute.code() ) {
+                ApiErrorResponse errorResponse = (ApiErrorResponse) clientApiRetrofit.responseBodyConverter(ApiErrorResponse.class, ApiErrorResponse.class.getAnnotations())
+                        .convert(execute.errorBody());
 
-//        return res;
+                log.error("errResponse : {} ", errorResponse.toString());
+                throw new OpenApiException(OpenApiErrorCode.RESOURCE_CONFLICT);
+
+            } else {
+
+                log.error(execute.errorBody().toString());
+            }
+        }
+        log.debug("# response getUser : {}", res);
+        log.debug("# response postUser : {}", res);
 
     }
 
@@ -57,9 +71,12 @@ public class ClientController {
 
                 log.error("errResponse : {} ", errorResponse.toString());
 
+                throw new OpenApiException(OpenApiErrorCode.RESOURCE_NOT_FOUND);
+
             } else {
 
                 log.error(execute.errorBody().toString());
+                throw new OpenApiException(OpenApiErrorCode.COMMON_ERROR);
             }
         }
         log.debug("# response getUser : {}", res);
@@ -77,20 +94,21 @@ public class ClientController {
         Response<okhttp3.ResponseBody> execute = responseCall.execute();
         okhttp3.ResponseBody res = execute.body();
         if ( !execute.isSuccessful() ) {
-            if( HttpStatus.NOT_FOUND.value() == execute.code() ) {
-                ApiErrorResponse errorResponse = (ApiErrorResponse) clientApiRetrofit.responseBodyConverter(ApiErrorResponse.class, ApiErrorResponse.class.getAnnotations())
-                        .convert(execute.errorBody());
-
-                log.error("errResponse : {} ", errorResponse.toString());
-
-            } else {
-
-                log.error(execute.errorBody().toString());
-            }
+//            if( HttpStatus.NOT_FOUND.value() == execute.code() ) {
+//                ApiErrorResponse errorResponse = (ApiErrorResponse) clientApiRetrofit.responseBodyConverter(ApiErrorResponse.class, ApiErrorResponse.class.getAnnotations())
+//                        .convert(execute.errorBody());
+//
+//                log.error("errResponse : {} ", errorResponse.toString());
+//
+//            } else {
+//
+//
+//            }
+            log.error(execute.errorBody().toString());
+            throw new OpenApiException(OpenApiErrorCode.COMMON_ERROR);
         }
         log.debug("# response putUser : {}", res);
 
-//        return res;
     }
 
     @PatchMapping
@@ -108,15 +126,14 @@ public class ClientController {
                         .convert(execute.errorBody());
 
                 log.error("errResponse : {} ", errorResponse.toString());
-
+                throw new OpenApiException(OpenApiErrorCode.RESOURCE_NOT_FOUND);
             } else {
-
                 log.error(execute.errorBody().toString());
+                throw new OpenApiException(OpenApiErrorCode.COMMON_ERROR);
             }
         }
         log.debug("# response patchUser : {}", res);
 
-//        return res;
     }
 
 
@@ -133,15 +150,14 @@ public class ClientController {
                         .convert(execute.errorBody());
 
                 log.error("errResponse : {} ", errorResponse.toString());
-
+                throw new OpenApiException(OpenApiErrorCode.RESOURCE_NOT_FOUND);
             } else {
-
                 log.error(execute.errorBody().toString());
+                throw new OpenApiException(OpenApiErrorCode.COMMON_ERROR);
             }
         }
         log.debug("# response deleteUser : {}", res);
 
-//        return res;
     }
 
 }
