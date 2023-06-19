@@ -1,14 +1,15 @@
 package my.example.restapi.exception;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ApiErrorResponse {
 
-    private final String code;
-    private final String message;
+    private String code;
+    private String message;
 
     public static ApiErrorResponse failure(String code, String message) {
         return ApiErrorResponse.builder()

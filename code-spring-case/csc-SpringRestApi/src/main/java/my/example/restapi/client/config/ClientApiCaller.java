@@ -2,6 +2,7 @@ package my.example.restapi.client.config;
 
 import my.example.restapi.client.model.ClientUser;
 import my.example.restapi.model.User;
+import okhttp3.ResponseBody;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,17 +16,17 @@ public interface ClientApiCaller {
     Call<User> getUser();
 
     @POST("/restapi-server/user")
-    Call<ClientUser.Response> postUser(@Body User user);
+    Call<ResponseBody> postUser(@Body User user);
 
 
     @PUT("/restapi-server/user")
-    Call<ClientUser.Response> putUser(@Body User user);
+    Call<ResponseBody> putUser(@Body User user);
 
     @PATCH("/restapi-server/user")
-    Call<ClientUser.Response> patchUser(@Body User user);
+    Call<ResponseBody> patchUser(@Body User user);
 
     @DELETE("/restapi-server/user")
-    Call<ClientUser.Response> deleteUser();
+    Call<ResponseBody> deleteUser();
 
 
     /**
