@@ -13,4 +13,10 @@ nextjs 는 React로 만드는 서버 사이드 랜더링 프레임 워크이다.
 * [next.js 기본 개념 알아보기](https://kyounghwan01.github.io/blog/React/next/basic/)   
 * [nextjs 의 기본 개념](https://kyounghwan01.github.io/blog/React/next/basic/#next-js%E1%84%80%E1%85%A1-%E1%84%8C%E1%85%A6%E1%84%80%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%8C%E1%85%AE%E1%84%8B%E1%85%AD-%E1%84%80%E1%85%B5%E1%84%82%E1%85%B3%E1%86%BC)   
 * [Nextjs cors 설정](https://betterjavacode.com/programming/how-to-use-cors-in-nestjs-application?amp=1)
+* [_app VS _document 용도 차이](https://merrily-code.tistory.com/154)  
+* [export 와 export default 차이](https://lily-im.tistory.com/21)  
+* [react - axios interceptor를 이용한 token refresher](https://mingmeng030.tistory.com/264)  
 * 
+
+
+

@@ -58,3 +58,10 @@ JSX가 HTML과 유사한 구문을 사용하여 React UI를 작성하는 데 사
 
 ### 참조 링크
 * [tsx 와 ts의 차이 & jsx 와 js 차이](https://subtlething.tistory.com/112)   
+
+
+
+## useEffect 내에서 async 함수를 사용할 때의 주의점
+
+### 참조링크
+[useEffect 내에서 async 함수를 사용할 때의 주의점](https://merrily-code.tistory.com/117)
