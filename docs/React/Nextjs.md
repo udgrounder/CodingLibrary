@@ -16,7 +16,9 @@ nextjs 는 React로 만드는 서버 사이드 랜더링 프레임 워크이다.
 * [_app VS _document 용도 차이](https://merrily-code.tistory.com/154)  
 * [export 와 export default 차이](https://lily-im.tistory.com/21)  
 * [react - axios interceptor를 이용한 token refresher](https://mingmeng030.tistory.com/264)  
-* 
+* [Authentication & Refresh token flow with Nextjs, Typescript, React Query and axios interceptors](https://srini-dev.hashnode.dev/authentication-refresh-token-flow-with-nextjs-typescript-react-query-and-axios-interceptors)
+* [axios interceptors와 refresh token을 활용한 jwt 토큰 관리](https://gusrb3164.github.io/web/2022/08/07/refresh-with-axios-for-client/)  
+* [axios interceptor를 이용한 token refresh](https://mingmeng030.tistory.com/264)    
 
 
 
