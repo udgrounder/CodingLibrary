@@ -97,6 +97,38 @@ public MyAccount updateMyAccount(@Validated(groups={MyAccount.ValidUpdateAccount
 ```
 
 
+## 에러 처리 
+
+Controller 또는 Service에서 에러를 발생 시키고 Advice 에서 공통으로 에러를 처리 한다. 
+
+```java
+
+@Slf4j
+@RestControllerAdvice(annotations = RestController.class)
+public class RestExceptionHandlerAdvice {
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	@ResponseBody
+	public RestResponse handleConstraintViolationException(ConstraintViolationException e) {
+		log.debug( "handleException.ConstraintViolationException" );
+		log.debug( e.toString() );
+		RestResponse restResponse = new RestResponse();
+		restResponse.setStatus(RestResponseStatus.INTERNAL_SERVER_ERROR);
+		String message = "입력값을 확인해 주시기 바랍니다.";
+		if ( !e.getConstraintViolations().isEmpty()) {
+			Optional<ConstraintViolation<?>> violation = e.getConstraintViolations().stream().findFirst();
+			if ( violation.isPresent() ) {
+				message = violation.get().getMessage();
+			}
+		}
+		restResponse.setResultMessage(message);
+
+		return restResponse;
+	}
+}
+
+```
+
 
 
 ### 참조 링크
