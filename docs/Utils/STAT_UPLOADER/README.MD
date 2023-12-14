@@ -12,6 +12,11 @@ json 으로 압축해서 저장된 파일을 mysql DB 에 업로드 하는 프�
         source venv/bin/activate
     ```
 
+- 필요한 라이브러리 설치: pip 설치
+    ```
+        brew instal pip
+    ```
+
 - 필요한 라이브러리 설치: MySQL Connector 설치
     ```
         pip3 install mysql-connector-python
