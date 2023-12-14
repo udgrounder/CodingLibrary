@@ -13,10 +13,10 @@ source_folder = work_date + '/source'
 extract_folder_base = work_date + '/extract'
 backup_folder_base = work_date + '/backup'
 mysql_config = {
-    'host': 'localhost',
-    'user': 'cpt',
-    'password': 'cptalk12!@',
-    'database': 'cptstat'
+    'host': ' ',
+    'user': ' ',
+    'password': ' ',
+    'database': ' '
 }
 
 # 로깅 설정
@@ -72,14 +72,43 @@ def get_gzip_filename(gzip_file):
     # 파일 경로에서 파일명만 추출
     return os.path.basename(gzip_file)
 
+def convert_to_datetime(date_string, formats):
+    for fmt in formats:
+        print (date_string)
+        print (fmt)
+        try:
+            return datetime.strptime(date_string, fmt)
+        except ValueError:
+            pass
+    raise ValueError("No valid date format found")
+
+def convert_am_pm_string(date_string):
+    translations = {
+        '오전': 'AM',
+        '오후': 'PM',
+        '上午': 'AM',
+        '下午': 'PM'
+    }
+
+    for k, v in translations.items():
+        date_string = date_string.replace(k, v)
+
+    return date_string
+
 def convert_and_move(date_string):
+
+    date_formats = ['%Y. %m. %d. %p %I:%M:%S', '%m/%d/%Y, %I:%M:%S %p', '%Y/%m/%d %p%I:%M:%S']
+    # 2023. 11. 26. 오전 12:00:39
+    # 11/22/2023, 10:42:23 AM
+    # 2023/11/22 上午10:48:14
+
     # 오전/오후를 AM/PM으로 변경
-    date_string = date_string.replace('오전', 'AM').replace('오후', 'PM')
+    date_string = convert_am_pm_string(date_string)
 
     # 문자열을 datetime 객체로 변환
-    dt_obj = datetime.strptime(date_string, '%Y. %m. %d. %p %I:%M:%S')
+    dt_obj = convert_to_datetime(date_string, date_formats)
 
-    # 맨 뒤로 이동
+    #  다시 컨버팅 이동
     formatted_date = datetime.strftime(dt_obj, '%Y-%m-%d %H:%M:%S')
     return formatted_date
 
@@ -88,7 +117,7 @@ def main():
     original_date_string = '2023. 11. 26. 오전 12:00:39'
     formatted_date = convert_and_move(original_date_string)
     print(formatted_date)
-    
+
 
     # 소스 폴더에서 모든 gzip 파일 찾기 (하위 폴더 포함)
     for root, dirs, files in os.walk(source_folder):
@@ -101,9 +130,9 @@ def main():
                 # logging.info("os.path.relpath(gzip_file, source_folder) : " + os.path.dirname(os.path.relpath(gzip_file, source_folder)))
                 extract_folder = os.path.join(extract_folder_base, os.path.dirname(os.path.relpath(gzip_file, source_folder))) + "/"
                 os.makedirs(os.path.dirname(extract_folder), exist_ok=True)
-                
+
                 extract_file = extract_folder + '/' + get_gzip_filename(gzip_file).replace('.gz', '')
-                # logging.info("gzip_file : " + gzip_file)
+                logging.info("gzip_file : " + gzip_file)
                 # logging.info("extract_folder : " + extract_folder)
                 # logging.info("extract_file : " + extract_file)
                 extract_gzip(gzip_file, extract_file)
