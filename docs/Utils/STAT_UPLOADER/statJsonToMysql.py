@@ -97,11 +97,12 @@ def convert_am_pm_string(date_string):
 
 def convert_and_move(date_string):
 
-    date_formats = ['%Y. %m. %d. %p %I:%M:%S', '%m/%d/%Y, %I:%M:%S %p', '%Y/%m/%d %p%I:%M:%S', '%Y/%m/%d %H:%M:%S']
+    date_formats = ['%Y. %m. %d. %p %I:%M:%S', '%m/%d/%Y, %I:%M:%S %p', '%Y/%m/%d %p%I:%M:%S', '%Y/%m/%d %H:%M:%S', '%d/%m/%Y, %H:%M:%S']
     # 2023. 11. 26. 오전 12:00:39
     # 11/22/2023, 10:42:23 AM
     # 2023/11/22 上午10:48:14
     # 2023/11/22 11:22:45
+    # 22/11/2023, 11:16:27
 
     # 오전/오후를 AM/PM으로 변경
     date_string = convert_am_pm_string(date_string)
